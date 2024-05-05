@@ -42,8 +42,33 @@ Destructor: Deallocate resource
 
 Prevents resource leaks, double-free, use when invalid
 
-How to implement?
+---
+#### How to implement?  
+**RAII: `std::ofstream`**
+```C++
+// non-RAII usage
+{
+    std::ofstream out;
+    
+    out.open("output.md");
+    
+    out << "# RAII" << '\n';
+    
+    out.close();
 
+```
+
+```C++
+// RAII usage
+{
+    std::ofstream out("output.md");
+    
+    out << "# RAII" << '\n';
+}
+```
+We use smart pointers
+- Smart pointers are automatically initialized with `nullptr`
+- Automatic destructor call for deallocation of the contained resource
 
 ## SOLID
 
@@ -82,7 +107,13 @@ Why is it important?
 ### Application Programming Interface
 
 - Large-scale mechanism for *separation of concerns*
-(need to add more, there wasn't much in the slides)
+(need to add more, there wasn't much in the slides)  
+
+**Good APIs**
+- Low complexity
+- High degree of safety
+- Flexible enough
+- Efficient enough
 
 ## PIMPL
 
