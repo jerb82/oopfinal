@@ -62,3 +62,91 @@ Why is it important?
 
 - Large-scale mechanism for *separation of concerns*
 (need to add more, there wasn't much in the slides)
+
+## PIMPL
+
+**P**ointer to **IMPL**ementation
+
+```C++
+
+/*
+    Good.hpp
+    Declaration of class Good
+    Is a good class... but does not have PIMPL
+*/
+
+#ifndef INCLUDED_GOOD_HPP
+#define INCLUDED_GOOD_HPP
+
+#include <vector>
+#include <optional>
+
+class Good {
+public:
+    // constructor
+    Good();
+    
+    // operation
+    void op(int n);
+
+private:
+    std::optional<int> firstnum;
+    std::vector<int> numbers;
+};
+
+#endif
+```
+
+**PIMPL**
+```C++
+
+/*
+    Good.hpp
+    Declaration of class Good
+*/
+
+#ifndef INCLUDED_GOOD_HPP
+#define INCLUDED_GOOD_HPP
+
+#include <memory>
+
+class Good {
+public:
+    // constructor
+    Good();
+    
+    // operation
+    void op(int n);
+
+    // destructor
+    ~Good();
+
+private:
+    struct GoodImpl;
+    std::unique_ptr<GoodImpl> impl;
+};
+
+#endif
+-------------------------------------------
+
+/*
+    Good.cpp
+    Implementation of class Good
+*/
+
+#include "Good.hpp"
+#include <vector>
+#include <optional>
+
+struct Good::GoodImpl {
+    GoodImpl() : numbers(1000) {}
+    std::optional<int> firstnum;
+    std::vector<int> numbers;
+};
+
+// constructor
+Good::Good()
+    : impl(new GoodImpl)
+{}
+...
+```
