@@ -12,8 +12,29 @@
 | }             |                            |                |
 
 The captures of a lambda are whatever is within the [], there can be empty captures, or you have have it be when you want to pass in everything, or we can name everything that we pass in, one by one,
+#### Lambda: `int` comparison
+```C++
 
-
+[](const void* e1, const void* e2)->int { 
+    int n1 = *(int*) e1;
+    int n2 = *(int*) e2;
+    
+    if (n1 < n2)
+        return -1;
+    else if (n1 > n2)
+        return 1;
+    else
+        return 0;
+}
+```
+## Extension Points
+- The points in the program you can register a handler for
+- Every extension point has a single handler
+- The handler is passed all data as parameters
+*Dealing with Handlers*
+![alt text](image.png)
+***note:*** *uhh a lot of this i am putting is incomplete this should all relate to lambdas but im still trying to figure how (maybe look over this for now)*  
+  
 ## RAII
 ### Resource Acquisition Is Initialization
 Constructor: Allocate resource
