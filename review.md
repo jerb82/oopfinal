@@ -65,8 +65,17 @@ Why is it important?
 
 ## PIMPL
 
-**P**ointer to **IMPL**ementation
+### ***P***ointer to ***IMPL***ementation
 
+- *Use a pointer to a class/struct declaration for an implementation class in the target class declaration file (i.e., .hpp)*
+- *Define the implementation class in the target class definition file (i.e., .cp*p)*  
+---
+**Include**
+- Implement using a class or struct.  
+- Typically, it is a struct since there is no need to keep it private.
+- A struct/class declaration forms an incomplete type
+std::unique_ptr<> can work with incomplete types (with one issue)  
+- std::unique_ptr<> used instead of raw pointer for RAII. I.e., don't depend on the destructor of the class to run
 ```C++
 
 /*
@@ -127,7 +136,13 @@ private:
 };
 
 #endif
--------------------------------------------
+```
+**Implementation**
+- Define the PIMPL struct in the definition file
+- Target class data member initiaization is now done in the PIMPL struct
+- Access to "members" is through a pointer, as opposed to when they were just members  
+
+```C++
 
 /*
     Good.cpp
@@ -148,5 +163,17 @@ struct Good::GoodImpl {
 Good::Good()
     : impl(new GoodImpl)
 {}
+// destructor
+Good::~Good() = default;
+
+// operation
+void Good::op(int n) {
+
+    // record first number inserted
+    if (!impl->firstnum)
+        impl->firstnum = n;
+
+    impl->numbers.push_back(n);
+}
 ...
 ```
