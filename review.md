@@ -69,6 +69,10 @@ Why is it important?
 
 - *Use a pointer to a class/struct declaration for an implementation class in the target class declaration file (i.e., .hpp)*
 - *Define the implementation class in the target class definition file (i.e., .cp*p)*  
+
+**Reasons**  
+- Class implementation is hidden  
+- Header file containing the class declaration only needs to include those files required for the class interface rather than for its implementation  
 ---
 **Include**
 - Implement using a class or struct.  
@@ -177,3 +181,55 @@ void Good::op(int n) {
 }
 ...
 ```
+
+## Dispatch
+Static vs. Dynamic, Given code and output, change code to generate the proper output
+
+
+Dispatch:
+Selecting which implementation of an operation (method or function) to call
+
+### Static Dispatch
+- Which operation (method or function) will be called is determined at compile time
+- Fast as a call can be made
+- Preferred by the compiler for these reasons
+
+- The compiler uses static dispatch whenever it can: 
+    * free functions
+    * non-virtual method
+    * static methods
+    * method calls from non-pointer and non-reference variables
+
+```C++
+void f() {}
+
+class C {
+public:
+    void f() {}
+    virtual void m() {}
+    static void s() {}
+};
+
+    f();
+    C c;
+    c.f();
+    c.m();
+    c.s();
+
+    C* pc = &c;
+    pc->f();
+//    pc->m();
+    pc->s();
+
+    C& rc = c;
+    rc.f();
+//    rc.m();
+    rc.s();
+```  
+---  
+### Dynamic Dispatch
+- For virtual methods call whose object is a *pointer* or *reference*
+- Requires more code than static dispatch
+- Slightly slower to call
+- Compilers have optimized dynamic dispatch, so the speed disadvantage is smaller than it used to be
+
