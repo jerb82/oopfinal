@@ -306,3 +306,48 @@ public:
 - Slightly slower to call
 - Compilers have optimized dynamic dispatch, so the speed disadvantage is smaller than it used to be
 
+
+
+## Dependency Injection
+
+- A broader form of Inversion of Control  
+- Once chosen, it doesn't tend to change during runtime  
+- The primary purpose is for testing  
+- Often extends the interface beyond that of the regular client  
+![alt text](https://mlcollard.net/images/DependencyInjectionSequence3.svg)
+
+![alt text](https://yuml.me/collard/design-pattern-dbaccessor.svg)
+
+#### Advantages:  
+- Decouples code  
+- Allows for rich testing  
+- Frameworks for creating mock objects  
+- Each class has a more direct purpose 
+
+#### Disadvantages:  
+- Creates more classes  
+- Obliged to do better testing  
+- Introduces a controlled increase in complexity  
+
+## Additional Points
+*courtesy of chatgpt*
+
+- **Facilitates Loose Coupling**: By decoupling dependencies from the dependent class, DI promotes loose coupling, which makes your code more flexible and easier to maintain.
+
+- **Promotes Single Responsibility Principle (SRP)**: DI encourages adhering to the SRP by ensuring that classes have a single responsibility and rely on external dependencies for additional functionality.
+
+- **Supports Dependency Inversion Principle (DIP)**: DI is closely related to the DIP, one of the SOLID principles, which states that high-level modules should not depend on low-level modules but rather both should depend on abstractions. DI helps achieve this by injecting dependencies via interfaces or abstract classes.
+
+- **Enhances Modifiability**: With DI, it's easier to modify the behavior of your application by simply changing the configuration or implementation of dependencies, without having to modify the dependent classes.
+
+- **Enables Composition Root**: DI often involves the concept of a composition root, which is the single place in your application where all dependencies are configured and wired together. This centralization simplifies the management of dependencies.
+
+- **Facilitates Dependency Inversion Containers (DICs)**: DI often goes hand-in-hand with DICs, which are frameworks that automate the process of managing dependencies. DICs handle the instantiation and injection of dependencies based on configuration.
+
+- **Improves Readability and Maintainability**: By separating the creation and configuration of objects from their usage, DI can lead to cleaner, more readable, and maintainable code.
+
+- **Encourages Design Patterns**: DI encourages the use of design patterns such as Factory, Builder, and Strategy patterns to manage the creation and injection of dependencies effectively.
+
+- **Caters to Scalability**: DI supports scalable application design by making it easier to add new features and functionalities without introducing significant code changes.
+
+- **Facilitates Parallel Development**: With DI, different components of the system can be developed in parallel, as long as their interfaces are agreed upon, fostering faster development cycles.
