@@ -77,7 +77,7 @@ fields/data members of
 ![alt text](image.png)
 ***note:*** *uhh a lot of this i am putting is incomplete this should all relate to lambdas but im still trying to figure how (maybe look over this for now)*  
 
-*Function pointers* as a handler is limited to free functions
+*Function pointers* as a handler is limited to free functions  
 *`std::function`* as handler has no limits but is very slow
 ## RAII
 ### Resource Acquisition Is Initialization
