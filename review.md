@@ -27,6 +27,11 @@ The captures of a lambda are whatever is within the [], there can be empty captu
         return 0;
 }
 ```
+
+
+## UML Multiplicity
+
+
 ## Extension Points
 - The points in the program you can register a handler for
 - Every extension point has a single handler
@@ -121,14 +126,16 @@ Why is coupling important?
 - Affects development path
 - Affects how we partition the system for testing
 - Affects how much reuse is possible
-- Significant effect on the complexity of a system
+- Significant effect on the complexity of a system  
+  
+*Collard asks about why decoupling is important, originally I thought he asked why coupling so important...*
 
 Why is ***decoupling*** important?
 - Zero to minimal coupling
 - Very easy to develop/test/maintain/use
 - Common refactoring activity
   
-  
+
 ## API 
 
 ### Application Programming Interface
@@ -310,9 +317,58 @@ public:
 - For virtual methods call whose object is a *pointer* or *reference*
 - Requires more code than static dispatch
 - Slightly slower to call
-- Compilers have optimized dynamic dispatch, so the speed disadvantage is smaller than it used to be
+- Compilers have optimized dynamic dispatch, so the speed disadvantage is smaller than it used to be  
 
+Static vs. Dynamic stems from the fact that in C++ you can have a pointer of a type base class point to an object of type derived class. In static dispatch, when the compiler sees a pointer of a base type it will call the method of the base class, even if it is pointing to a derived class object. In dynamic dispatch, (with virtual), the `virtual` keyword basically tells the compiler to wait till runtime to determine the type of the object, making it properly call the method of the derived class.  
 
+```C++
+#include <iostream>
+
+// Base class
+class Base {
+public:
+    // Virtual function
+    virtual void display() {
+        std::cout << "Base class display()" << std::endl;
+    }
+};
+
+// Derived class
+class Derived : public Base {
+public:
+    // Override the display function
+    void display() override {
+        std::cout << "Derived class display()" << std::endl;
+    }
+};
+
+int main() {
+    Base* basePtr;
+    
+    Base baseObj;
+    Derived derivedObj;
+    
+    // Static dispatch
+    basePtr = &baseObj; // Base pointer pointing to a Base object
+    basePtr->display(); // Calls Base class display()
+
+    basePtr = &derivedObj; // Base pointer pointing to a Derived object
+    basePtr->display(); // Still calls Base class display() due to static dispatch
+
+    std::cout << std::endl;
+
+    // Dynamic dispatch with virtual functions
+    Base* dynamicBasePtr;
+
+    dynamicBasePtr = &baseObj; // Base pointer pointing to a Base object
+    dynamicBasePtr->display(); // Calls Base class display()
+
+    dynamicBasePtr = &derivedObj; // Base pointer pointing to a Derived object
+    dynamicBasePtr->display(); // Calls Derived class display() due to dynamic dispatch
+
+    return 0;
+}
+```
 
 ## Dependency Injection
 
