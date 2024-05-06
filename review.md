@@ -37,6 +37,9 @@ The captures of a lambda are whatever is within the [], there can be empty captu
   
 ## RAII
 ### Resource Acquisition Is Initialization
+
+Holding a resource is tied to an object's lifetime
+
 Constructor: Allocate resource
 Destructor: Deallocate resource
 
@@ -44,6 +47,14 @@ Prevents resource leaks, double-free, use when invalid
 
 ---
 #### How to implement?  
+- Constructor: Allocate resource
+- Destructor: Deallocate resource
+- Access: Direct access to a resource
+- Boolean: Check if the resource exists (i.e., has been allocated and is still valid)
+- Copy, Assignment: Transfer resource control to new RAII object
+- Deallocate: Deallocate resource before Destructor (safely)
+
+
 **RAII: `std::ofstream`**
 ```C++
 // non-RAII usage
