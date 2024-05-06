@@ -31,6 +31,43 @@ The captures of a lambda are whatever is within the [], there can be empty captu
 
 ## UML Multiplicity
 
+UML multiplicity, generalization (inheritance), composition, and aggregation. Understand the difference between composition and aggregation and when we would use one over the other. Know the UML arrows for them.
+
+| Relationship    | Description             |
+|-----------------|-------------------------|
+| Dependency      | *uses a*                  |
+| Generalization  | *is a*                    |
+| Association     | *has a*                  |
+| **Aggregation** (Association)     | *has a*                   |
+| **Composition** (Association)     | *has a*                   |
+
+#### Composition
+![alt text](https://yuml.me/collard/association-composition.svg)  
+- Target belongs **only** to the source
+- Source (e.g., University) controls the *lifetime* of the target (e.g., College)
+
+*Code:*  
+fields/data members of  
+- direct type  
+- containers  
+- pointers/references to objects created (and destroyed) internally  
+
+#### Aggregation
+![alt text](https://yuml.me/collard/association-aggregation.svg)
+
+- part of relationship
+- special kind of association with roles and mulitplicites often used
+- The source (e.g., Club) **doesn't** control the lifetime of the target (e.g., Member)
+
+*Code:*
+- Fields (data members) are pointers/references to this type, and the objects are created externally  
+
+---
+
+**Differences:**
+- Prefer *Composition* to *Aggregation* as the object's lifetime is clearer
+- *Aggregation* has particular roles in more complex relationships, especially with polymorphic data members
+- Two are often confused, and terms used interchangeably
 
 ## Extension Points
 - The points in the program you can register a handler for
@@ -39,7 +76,9 @@ The captures of a lambda are whatever is within the [], there can be empty captu
 *Dealing with Handlers*
 ![alt text](image.png)
 ***note:*** *uhh a lot of this i am putting is incomplete this should all relate to lambdas but im still trying to figure how (maybe look over this for now)*  
-  
+
+*Function pointers* as a handler is limited to free functions
+*`std::function`* as handler has no limits but is very slow
 ## RAII
 ### Resource Acquisition Is Initialization
 
@@ -277,7 +316,7 @@ Dispatch:
 Selecting which implementation of an operation (method or function) to call
 
 ### Static Dispatch
-- Which operation (method or function) will be called is determined at compile time
+- Which operation (method or function) will be called is determined at **compile** time
 - Fast as a call can be made
 - Preferred by the compiler for these reasons
 
@@ -315,6 +354,7 @@ public:
 ```  
 ---  
 ### Dynamic Dispatch
+- Selecting which implementation of an operation(method) to call at **run time**
 - For virtual methods call whose object is a *pointer* or *reference*
 - Requires more code than static dispatch
 - Slightly slower to call
@@ -370,6 +410,50 @@ int main() {
     return 0;
 }
 ```
+## Vtable
+how it works...
+
+- At compile time, the virtual table or vtable is created to store the information required for the dynamic dispatch of virtual methods for a class  
+- For every object of a class that has a vtable, the object has a pointer to the class vtable  
+
+```C++
+
+class Circle : public Shape {
+public:
+    void draw() override;
+};
+
+void apply(Shape& shape) {
+    // NOTE: virtual method call
+    base.draw();
+}
+
+void apply(Shape* shape) {
+    // NOTE: virtual method call
+    pbase->draw();
+}
+
+Circle circle;
+apply(circle);
+apply(&circle);
+```
+
+**vtable for class Shape**  
+```C++
+class Shape {
+public:
+    void f();
+    virtual void draw();
+    virtual void move();
+    static void s();
+};
+```
+![alt text](https://mlcollard.net/images/Shape.svg)  
+
+A vtable has:  
+- typeInfo  
+- Array of pointers to virtual methods  
+- Virtual method calls for dynamic dispatch are stored in the program as an array index, i.e., method[0] for the first virtual method, method[1] for the second virtual method, etc.  
 
 ## Dependency Injection
 
