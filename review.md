@@ -46,6 +46,16 @@ Destructor: Deallocate resource
 Prevents resource leaks, double-free, use when invalid
 
 ---
+
+#### Why is it important?
+
+- RAII behavior prevents resource errors without any additional burden to the developer  
+- Ensures proper behavior  
+- Makes the resource much easier to work with, don't have to explicity `close()`  
+
+Thus... all resources should be built with RAII behavior  
+
+---
 #### How to implement?  
 - Constructor: Allocate resource
 - Destructor: Deallocate resource
