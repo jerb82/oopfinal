@@ -109,9 +109,10 @@ Know the list of principles, both abbreviations and full names
 
 
 ## Coupling
-Definition, list of types of coupling, why decoupling is important
 
 Degree of interdependence between software modules; a measure of how closely connected two routines or modules are; the strength of the relationships between modules
+
+The goal of **coupling** is to *minimize* external interaction
 
 Types of Coupling
 -  Message Coupling *(very best)*
