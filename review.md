@@ -116,13 +116,19 @@ Types of Coupling
 - Common Coupling
 - Content Coupling *(worst)*
 
-Why is it important?
+Why is coupling important?
 - Perhaps the most important characteristics of a system
 - Affects development path
 - Affects how we partition the system for testing
 - Affects how much reuse is possible
 - Significant effect on the complexity of a system
 
+Why is ***decoupling*** important?
+- Zero to minimal coupling
+- Very easy to develop/test/maintain/use
+- Common refactoring activity
+  
+  
 ## API 
 
 ### Application Programming Interface
