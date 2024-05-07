@@ -521,8 +521,16 @@ A vtable has:
 - The primary purpose is for testing  
 - Often extends the interface beyond that of the regular client  
 --- 
+
 *Just deals with **testing***  
-![alt text](https://mlcollard.net/images/DependencyInjectionSequence2.svg)  
+
+![alt text](https://mlcollard.net/images/DependencyInjectionSequence2.svg)
+
+- Testing code  
+- Client calls orderProcessor()  
+- OrderProcessor uses TestDBUtilities  
+- TestDBUtilities is hardwired to provide a test case without a Database  
+
 ![alt text](https://yuml.me/collard/design-pattern-dbaccessor.svg)
 --- 
 #### Advantages:  
