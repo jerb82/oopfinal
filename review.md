@@ -77,6 +77,65 @@ fields/data members of
 ![alt text](image.png)
 ***note:*** *uhh a lot of this i am putting is incomplete this should all relate to lambdas but im still trying to figure how (maybe look over this for now)*  
 
+*Extension point with **Template***  
+```C++
+#include <string>
+
+template <typename compare, typename compute>
+class Process {
+public:
+    void process() {
+        // ...
+        if (compare(compute(value1), value2))
+            ;
+        // ...
+    }
+private:
+    int value1;
+    int value2;
+};
+
+int main(int argc, char* argv[]) {
+
+    int adjust = std::stoi(argv[1]);
+
+    auto lessthan = [](int n1, int n2)->bool { return n1 < n2; };
+    auto addAdjust = [adjust](int n)->int { return n + adjust; };
+
+    Process<decltype(lessthan), decltype(addAdjust)> processor;
+
+    return 0;
+}
+```
+
+*Extension point with **Handlers***  
+```C++
+class AbstractHandler {
+public:
+    virtual void primitiveOperation1() = 0;
+    virtual void primitiveOperation2() = 0;
+};
+
+class MainClass {
+public:
+    // constructor with handler
+    MainClass(AbstractHandler& handler)
+        : handler(handler) {
+    }
+
+    void templateMethod();
+
+private:
+    AbstractHandler& handler;
+};
+
+class ConcreteHandler : public AbstractHandler {
+public:
+    void primitiveOperation1();
+    void primitiveOperation2();
+};
+```
+
 *Function pointers* as a handler is limited to free functions  
 *`std::function`* as handler has no limits but is very slow
 ## RAII
