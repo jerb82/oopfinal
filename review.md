@@ -75,8 +75,38 @@ fields/data members of
 - The handler is passed all data as parameters
 *Dealing with Handlers*
 ![alt text](image.png)
-***note:*** *uhh a lot of this i am putting is incomplete this should all relate to lambdas but im still trying to figure how (maybe look over this for now)*  
 
+
+*Extension point with **Direct Inheritance***  
+```C++
+#include <iostream>
+// Base class
+class Shape {
+public:
+virtual void draw() = 0; // Pure virtual function
+};
+// Derived class Rectangle
+class Rectangle : public Shape {
+public:
+void draw() override {
+std::cout << "Drawing a rectangle." << std::endl;
+}
+};
+// Derived class Circle
+class Circle : public Shape {
+public:
+void draw() override {
+std::cout << "Drawing a circle." << std::endl;
+}
+};
+int main() {
+Rectangle rectangle;
+Circle circle;
+rectangle.draw();
+circle.draw();
+return 0;
+}
+```
 *Extension point with **Template***  
 ```C++
 #include <string>
@@ -241,12 +271,14 @@ Why is ***decoupling*** important?
 
 - Large-scale mechanism for *separation of concerns*
 (need to add more, there wasn't much in the slides)  
+- Set of rules and protocols that allows different software applications to communicate with each other  
 
 **Good APIs**
 - Low complexity
 - High degree of safety
 - Flexible enough
 - Efficient enough
+
 
 ## PIMPL
 
