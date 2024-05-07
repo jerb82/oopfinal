@@ -279,6 +279,8 @@ Why is ***decoupling*** important?
 - Flexible enough
 - Efficient enough
 
+*Language Design is library design*
+*Libray Design is Language Design*
 
 ## PIMPL
 
