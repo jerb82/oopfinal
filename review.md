@@ -520,10 +520,11 @@ A vtable has:
 - Once chosen, it doesn't tend to change during runtime  
 - The primary purpose is for testing  
 - Often extends the interface beyond that of the regular client  
-![alt text](https://mlcollard.net/images/DependencyInjectionSequence3.svg)
-
+--- 
+*Just deals with **testing***  
+![alt text](https://mlcollard.net/images/DependencyInjectionSequence2.svg)  
 ![alt text](https://yuml.me/collard/design-pattern-dbaccessor.svg)
-
+--- 
 #### Advantages:  
 - Decouples code  
 - Allows for rich testing  
