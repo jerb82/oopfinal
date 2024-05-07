@@ -514,6 +514,8 @@ A vtable has:
 - Array of pointers to virtual methods  
 - Virtual method calls for dynamic dispatch are stored in the program as an array index, i.e., method[0] for the first virtual method, method[1] for the second virtual method, etc.  
 
+![alt text](https://mlcollard.net/images/CircleFunctions.svg)
+
 ## Dependency Injection
 
 - A broader form of Inversion of Control  
